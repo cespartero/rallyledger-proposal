@@ -201,6 +201,13 @@ body.notes section.dark > aside { color: var(--ink-muted-dark); background: rgba
 /* A number badge on a lime card is reversed: lime on navy. */
 .card.lime .num { background: var(--court-navy) !important; color: var(--ball-lime) !important; }
 
+/* Number beside its heading (slide 3) */
+.card > div > .num + h3 { margin: 0; }
+#why-series .card { padding: clamp(16px, 1.5vw, 28px) clamp(18px, 1.8vw, 32px); gap: clamp(6px, .7vw, 12px); }
+#why-series .card p:not(.num) { font-size: clamp(15px, 1.15vw, 22px); }
+#why-series .card h3 { font-size: clamp(20px, 1.8vw, 34px); }
+@media (min-width: 701px) { #why-series .grid2 { grid-template-columns: 1fr 1fr; } }
+
 </style>
 </head>
 <body>
@@ -227,26 +234,42 @@ body.notes section.dark > aside { color: var(--ink-muted-dark); background: rgba
 <div class="card lime in" style="padding:48px 56px;gap:16px">
 <p class="tag" style="color:#0E2A3B">my proposal</p>
 <h2>A Club Championship Series, run on RallyLedger</h2>
+<p style="align-self:flex-start;margin-top:8px;background:#0E2A3B;color:#C8F031;font-family:'Space Grotesk', Arial, sans-serif;font-weight:700;letter-spacing:1px;padding:10px 28px;border-radius:999px">For the club, built by the club</p>
 </div>
-<p class="lead in" style="--i:1">RallyLedger was built for our club, and it handles every part of the series:</p>
+<p class="lead in" style="--i:1">RallyLedger was built here, around how our club plays, and it handles every part of the series:</p>
 <div class="grid3">
 <div class="card in" style="--i:2"><p class="tag">Before the night</p><h3>Fixture list</h3><p>Sessions are scheduled ahead, and players RSVP so organisers know who’s coming.</p></div>
 <div class="card in" style="--i:3"><p class="tag">On the night</p><h3>Scoreboard</h3><p>Check people in, draw the games, enter the scores. Everyone’s phone updates live.</p></div>
 <div class="card navy in" style="--i:4"><p class="tag" style="color:#C8F031">Across the season</p><h3>The ladder</h3><p>Every night’s finish earns championship points that build into the season standings.</p></div>
 </div>
-<aside>Here’s the proposal in one line: we run a Club Championship Series across the season, and RallyLedger, the system built for our club, runs it for us. Think of it as the club noticeboard, the scorer’s clipboard and the trophy ladder, all in one place on your phone. It replaces the clipboard, the whiteboard and the spreadsheet. Before a session it’s the fixture list and RSVP sheet. On the night it’s the scorer. Across the season it keeps the ladder. The rest of this talk walks through each part.</aside>
+<aside>Here’s the proposal in one line: we run a Club Championship Series across the season, and RallyLedger runs it for us. It’s for the club, built by the club: it was made by one of our own members, around the way we actually play, not bought off the shelf. Think of it as the club noticeboard, the scorer’s clipboard and the trophy ladder, all in one place on your phone. It replaces the clipboard, the whiteboard and the spreadsheet. Before a session it’s the fixture list and RSVP sheet. On the night it’s the scorer. Across the season it keeps the ladder. The rest of this talk walks through each part.</aside>
 </section>
 <section id="why-series">
 <div class="head">
 <p class="eyebrow">Why a championship series</p>
 <h2>Why a series is good for the club</h2>
 </div>
-<div class="grid3">
-<div class="card in" style="--i:1"><p class="num">1</p><h3>Builds club camaraderie</h3><p>Everyone shares one season. Rotating partners means you play with lots of members, and everyone follows the same ladder.</p><p style="color:#0E2A3B"><i>Like a footy club: the whole club gets behind the season.</i></p></div>
-<div class="card in" style="--i:2"><p class="num">2</p><h3>Brings in income</h3><p>Points reward turning up, so players have a reason to keep coming back. More regular attendance means more session fees for the club.</p><p style="color:#0E2A3B"><i>Like a loyalty card: every visit adds a stamp.</i></p></div>
-<div class="card navy in" style="--i:3"><p class="num">3</p><h3>A baseline for every player</h3><p>Every member builds a results history and a Club Rating, so we know where everyone stands, newcomers included.</p><p style="color:#C8F031"><i>Like a golf club’s handicap register.</i></p></div>
+<div class="grid2">
+<div class="card in" style="--i:1"><div style="display:flex;gap:20px;align-items:center"><p class="num">1</p><h3>Builds club camaraderie</h3></div><p style="">Everyone shares one season. Rotating partners means you play with lots of members, and everyone follows the same ladder.</p><p style="color:#0E2A3B"><i>Like a footy club: the whole club gets behind the season.</i></p></div>
+<div class="card in" style="--i:2"><div style="display:flex;gap:20px;align-items:center"><p class="num">2</p><h3>Brings in income</h3></div><p style="">Points reward turning up, so players have a reason to keep coming back. More regular attendance means more session fees for the club.</p><p style="color:#0E2A3B"><i>Like a loyalty card: every visit adds a stamp.</i></p></div>
+<div class="card navy in" style="--i:3"><div style="display:flex;gap:20px;align-items:center"><p class="num" style="color:#1f4a63">3</p><h3>A baseline for every player</h3></div><p style="">Every member builds a results history and a Club Rating, so we know where everyone stands, newcomers included.</p><p style="color:#C8F031"><i>Like a golf club’s handicap register.</i></p></div>
+<div class="card lime in" style="--i:4"><div style="display:flex;gap:20px;align-items:center"><p class="num" style="background:#0E2A3B;color:#C8F031">4</p><h3>Draws in new members</h3></div><p style=""><b>League-style competitions are very popular.</b> A series of our own gets talked about, and players who want in have a reason to join our club.</p><p style=""><i>Like a busy café: a queue out the door brings more people in.</i></p></div>
 </div>
-<aside>So why do this at all? Three reasons. First, camaraderie: a season gives everyone a shared story. With rotating partners you play alongside lots of different members, and everyone is following the same ladder, the same way a footy club rallies around its season. Second, income: championship points reward turning up, and dropped results mean a missed week is never a reason to give up. Players have a reason to keep coming back, and regular attendance means steady session fees for the club. It works like a loyalty card. Third, a baseline: every player builds a results history and a Club Rating. That tells us where everyone stands, helps us place newcomers and set up fair divisions, a bit like a golf club’s handicap register.</aside>
+<aside>So why do this at all? Four reasons. First, camaraderie: a season gives everyone a shared story. With rotating partners you play alongside lots of different members, and everyone is following the same ladder, the same way a footy club rallies around its season. Second, income: championship points reward turning up, and dropped results mean a missed week is never a reason to give up. Players have a reason to keep coming back, and regular attendance means steady session fees for the club. It works like a loyalty card. Third, a baseline: every player builds a results history and a Club Rating. That tells us where everyone stands, helps us place newcomers and set up fair divisions, a bit like a golf club’s handicap register. And fourth, growth: league-style competitions are very popular with players right now, so if the series takes off, people will hear about it, and anyone who wants a shot at the championship has a reason to join our club. Like a busy café, a bit of buzz brings more people through the door.</aside>
+</section>
+<section id="when-we-play">
+<div class="head">
+<p class="eyebrow">When we’d play</p>
+<h2>Put our quiet court days to work</h2>
+<p class="lead">Run the series as a weekly club session on a day the courts are under-used.</p>
+</div>
+<div class="grid3">
+<div class="card in" style="--i:1"><p class="tag">Option A</p><h3>A weekday session</h3><p>Low-attendance days like Thursday become a regular, busy club night.</p></div>
+<div class="card in" style="--i:2"><p class="tag">Option B</p><h3>Saturday afternoons</h3><p>A relaxed weekend slot for members who can’t make weeknights.</p></div>
+<div class="card lime in" style="--i:3"><p class="tag" style="color:#0E2A3B">Next step</p><h3>Ask our members</h3><p>A quick survey decides the day, so we pick the slot most people can make.</p></div>
+</div>
+<div class="analogy in" style="--i:4"><p class="k">Like pub trivia night</p><p>A regular weekly night that turns a quiet midweek evening into one everyone looks forward to.</p></div>
+<aside>A practical point on timing. The series runs as a weekly club session, and we can put it on a day the courts are quiet. Thursday is one of our low-attendance days, so it’s an obvious candidate. Saturday afternoon is the other option, for members who can’t do weeknights. Rather than guess, we’d run a quick survey of members and go with whatever most people can make. Think of a pub trivia night: the pub picks its quietest night of the week, makes it a regular fixture, and soon it’s the night everyone turns up for. The series can do that for our courts.</aside>
 </section>
 <section id="ladder-league">
 <div class="head">
@@ -380,7 +403,7 @@ body.notes section.dark > aside { color: var(--ink-muted-dark); background: rgba
 </div>
 <div class="total in" style="--i:2">
 <p class="big">383</p>
-<p style="font-size:32px">championship points: 100 + 85 + 75 + 65 + 58. The two weakest nights and the missed week don’t count against Sam at all.</p>
+<p style="">championship points: 100 + 85 + 75 + 65 + 58. The two weakest nights and the missed week don’t count against Sam at all.</p>
 </div>
 <div class="analogy in" style="--i:3"><p class="k">The takeaway</p><p>You can only add to your score. Nothing you do on a bad night can take points away.</p></div>
 <aside>Here’s how it looks in practice. Sam played seven of the eight nights and was away once. The lime boxes are the five best results, which add up to 383. Night 3 and Night 6 were poor nights and they’re simply dropped, and the week away costs nothing. Notice there’s no way for a bad night to pull Sam’s total down: it either counts because it’s one of the best, or it’s ignored.</aside>
