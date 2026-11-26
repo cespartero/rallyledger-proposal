@@ -82,8 +82,10 @@ p { margin: 0; font-size: clamp(16px, 1.45vw, 28px); line-height: 1.45; color: v
 .dark .card { background: var(--navy-raised); border-color: var(--line-dark); }
 .dark .card h3 { color: #F6F7F2; }
 .dark .card p { color: var(--ink-muted-dark); }
-.dark .card.lime { background: var(--ball-lime); border-color: var(--ball-lime); }
-.dark .card.lime h3, .dark .card.lime p { color: var(--court-navy); }
+/* On dark slides every card is navy-raised, as in the deck (a lime card there shows navy too). */
+.dark .card.lime { background: var(--navy-raised); border-color: var(--line-dark); }
+.dark .card.lime h3 { color: #F6F7F2; }
+.dark .card.lime p { color: var(--ink-muted-dark); }
 
 .num { font-family: 'Space Grotesk', Arial, sans-serif; font-size: clamp(18px, 1.6vw, 30px) !important; font-weight: 700; color: var(--court-navy) !important; background: var(--ball-lime); width: clamp(40px, 3.4vw, 64px); height: clamp(40px, 3.4vw, 64px); border-radius: 999px; display: flex; align-items: center; justify-content: center; flex: none; }
 .tag { font-family: 'Space Grotesk', Arial, sans-serif; font-size: clamp(11px, 1.1vw, 20px) !important; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--navy-700); }
