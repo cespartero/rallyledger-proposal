@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Club Championship Proposal · RallyLedger</title>
+<meta name="description" content="A proposal to run a Club Championship Series on RallyLedger: how seasons, championship points, divisions and logins work.">
+<meta name="theme-color" content="#0E2A3B">
+<link rel="icon" href="data:image/svg+xml,<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'><circle cx='50' cy='50' r='46' fill='%23C8F031'/><g fill='%230E2A3B'><circle cx='38' cy='26' r='7'/><circle cx='38' cy='38' r='7'/><circle cx='38' cy='50' r='7'/><circle cx='38' cy='62' r='7'/><circle cx='38' cy='74' r='7'/><circle cx='50' cy='74' r='7'/><circle cx='62' cy='74' r='7'/></g></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+/* RallyLedger proposal: scrolling web version of the deck (Locar Pickle Systems brand). */
+:root {
+  --court-navy: #0E2A3B;
+  --ball-lime: #C8F031;
+  --lime-soft: #E2FA8A;
+  --navy-700: #1F4A63;
+  --surface: #F6F7F2;
+  --surface-raised: #FFFFFF;
+  --ink: #0E2A3B;
+  --ink-muted: #3B5566;
+  --ink-muted-dark: #A9BAC4;
+  --line: #DCE0D6;
+  --line-dark: #2C4A5C;
+  --navy-raised: #153548;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+* { box-sizing: border-box; }
+html { scroll-snap-type: y proximity; scroll-behavior: smooth; background: var(--surface); }
+body { margin: 0; font-family: 'Inter', Arial, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+::selection { background: var(--ball-lime); color: var(--court-navy); }
+
+/* ---------- Slides as full-height scenes ---------- */
+section {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: clamp(72px, 9vh, 120px) clamp(20px, 7vw, 128px) clamp(56px, 8vh, 112px);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(20px, 3.2vh, 40px);
+  scroll-snap-align: start;
+  overflow: hidden;
+}
+section > * { width: 100%; max-width: 1600px; margin-left: auto; margin-right: auto; }
+section.dark { background: var(--court-navy); color: #F6F7F2; }
+section > aside { display: none; }
+
+h1, h2, h3 { font-family: 'Space Grotesk', Arial, sans-serif; color: var(--ink); margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(40px, 7vw, 112px); line-height: 1.0; font-weight: 700; letter-spacing: -0.03em; }
+h2 { font-size: clamp(30px, 4.4vw, 68px); line-height: 1.06; font-weight: 700; letter-spacing: -0.02em; }
+h3 { font-size: clamp(21px, 2.2vw, 40px); line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; }
+p { margin: 0; font-size: clamp(16px, 1.45vw, 28px); line-height: 1.45; color: var(--ink-muted); }
+.dark h1, .dark h2, .dark h3 { color: #F6F7F2; }
+.dark p { color: var(--ink-muted-dark); }
+
+.eyebrow { font-family: 'Space Grotesk', Arial, sans-serif; font-size: clamp(12px, 1.2vw, 22px); font-weight: 500; letter-spacing: .25em; text-transform: uppercase; color: var(--navy-700); }
+.dark .eyebrow { color: var(--ball-lime); }
+.head { display: flex; flex-direction: column; gap: clamp(10px, 1.4vw, 20px); }
+.lead { font-size: clamp(17px, 1.8vw, 32px); line-height: 1.4; color: var(--ink-muted); max-width: 1400px; }
+.dark .lead { color: var(--ink-muted-dark); }
+
+/* ---------- Cards and grids ---------- */
+.row { display: flex; gap: 32px; flex-wrap: wrap; }
+.grid2, .grid3, .grid4 { display: grid; gap: clamp(14px, 2vw, 32px); }
+.grid2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+.grid3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.grid4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); }
+.card { background: var(--surface-raised); border: 2px solid var(--line); border-radius: clamp(16px, 1.6vw, 24px); padding: clamp(20px, 2.4vw, 40px); display: flex; flex-direction: column; gap: clamp(8px, 1vw, 16px); transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
+.card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -24px rgba(14, 42, 59, .45); }
+.card p { font-size: clamp(15px, 1.35vw, 26px); }
+.card.navy { background: var(--court-navy); border-color: var(--court-navy); }
+.card.navy h3 { color: #F6F7F2; }
+.card.navy p { color: var(--ink-muted-dark); }
+.card.lime { background: var(--ball-lime); border-color: var(--ball-lime); }
+.card.lime h3, .card.lime h2, .card.lime p { color: var(--court-navy); }
+.dark .card { background: var(--navy-raised); border-color: var(--line-dark); }
+.dark .card h3 { color: #F6F7F2; }
+.dark .card p { color: var(--ink-muted-dark); }
+.dark .card.lime { background: var(--ball-lime); border-color: var(--ball-lime); }
+.dark .card.lime h3, .dark .card.lime p { color: var(--court-navy); }
+
+.num { font-family: 'Space Grotesk', Arial, sans-serif; font-size: clamp(18px, 1.6vw, 30px) !important; font-weight: 700; color: var(--court-navy) !important; background: var(--ball-lime); width: clamp(40px, 3.4vw, 64px); height: clamp(40px, 3.4vw, 64px); border-radius: 999px; display: flex; align-items: center; justify-content: center; flex: none; }
+.tag { font-family: 'Space Grotesk', Arial, sans-serif; font-size: clamp(11px, 1.1vw, 20px) !important; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--navy-700); }
+.dark .tag { color: var(--ball-lime); }
+
+.analogy { display: flex; flex-wrap: wrap; gap: clamp(12px, 1.6vw, 28px); align-items: center; background: var(--lime-soft); border-radius: clamp(16px, 1.6vw, 24px); padding: clamp(18px, 2vw, 32px) clamp(20px, 2.4vw, 40px); }
+.analogy .k { font-family: 'Space Grotesk', Arial, sans-serif; font-size: clamp(11px, 1.05vw, 20px); font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--court-navy) !important; background: var(--ball-lime); border-radius: 999px; padding: 8px 20px; white-space: nowrap; }
+.analogy p:not(.k) { font-size: clamp(16px, 1.5vw, 28px); color: var(--court-navy); flex: 1 1 260px; }
+.dark .analogy { background: var(--navy-raised); }
+.dark .analogy p:not(.k) { color: #F6F7F2; }
+
+.steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: clamp(12px, 1.4vw, 24px); }
+.step { display: flex; flex-direction: column; gap: clamp(10px, 1.1vw, 18px); background: var(--surface-raised); border: 2px solid var(--line); border-radius: clamp(16px, 1.6vw, 24px); padding: clamp(18px, 1.8vw, 32px); }
+.step h3 { font-size: clamp(20px, 1.8vw, 34px); }
+.step p { font-size: clamp(15px, 1.3vw, 24px); }
+
+/* Points ladder */
+.ladder { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 120px), 1fr)); gap: clamp(10px, 1.2vw, 20px); }
+.rung { background: var(--surface-raised); border: 2px solid var(--line); border-radius: 18px; padding: clamp(12px, 1.4vw, 24px) clamp(14px, 1.6vw, 28px); display: flex; flex-direction: column; gap: 2px; }
+.rung .place { font-size: clamp(14px, 1.3vw, 24px); color: var(--ink-muted); }
+.rung .pts { font-family: 'Space Grotesk', Arial, sans-serif; font-size: clamp(28px, 3vw, 56px); font-weight: 700; color: var(--court-navy); line-height: 1.1; }
+.rung.top { background: var(--ball-lime); border-color: var(--ball-lime); }
+.rung.top .place { color: var(--court-navy); }
+
+/* Season timeline */
+.timeline { display: flex; align-items: center; }
+.dot { flex: none; width: clamp(30px, 6vw, 112px); height: clamp(30px, 6vw, 112px); border-radius: 999px; background: var(--surface-raised); border: 3px solid var(--court-navy); display: flex; align-items: center; justify-content: center; font-family: 'Space Grotesk', Arial, sans-serif; font-size: clamp(13px, 2vw, 38px); font-weight: 700; color: var(--court-navy); }
+.dot.done { background: var(--court-navy); color: #F6F7F2; }
+.dot.final { width: clamp(64px, 11vw, 210px); background: var(--ball-lime); border-color: var(--ball-lime); }
+.link { flex: 1; height: 3px; background: var(--court-navy); transform-origin: left center; }
+
+/* Results example */
+.results { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 96px), 1fr)); gap: clamp(8px, 1vw, 16px); }
+.res { border-radius: 18px; padding: clamp(12px, 1.4vw, 24px) 8px; display: flex; flex-direction: column; align-items: center; gap: 4px; background: var(--surface-raised); border: 2px solid var(--line); text-align: center; }
+.res .s { font-size: clamp(12px, 1.2vw, 22px); color: var(--ink-muted); }
+.res .v { font-family: 'Space Grotesk', Arial, sans-serif; font-size: clamp(24px, 2.8vw, 52px); font-weight: 700; color: var(--court-navy); line-height: 1.1; }
+.res .w { font-size: clamp(12px, 1.2vw, 22px); font-weight: 600; color: var(--court-navy); }
+.res.kept { background: var(--ball-lime); border-color: var(--ball-lime); }
+.res.kept .s { color: var(--court-navy); }
+.res.dropped, .res.missed { background: var(--surface); border: 2px dashed #93A5B0; }
+.res.dropped .v, .res.dropped .w, .res.missed .v, .res.missed .w { color: #5F7584; }
+.res.missed .v { font-size: clamp(18px, 2vw, 38px); }
+.total { display: flex; flex-wrap: wrap; align-items: center; gap: clamp(14px, 2vw, 32px); }
+.total .big { font-family: 'Space Grotesk', Arial, sans-serif; font-size: clamp(56px, 7vw, 96px); font-weight: 700; color: var(--court-navy); line-height: 1; }
+.total p:not(.big) { flex: 1 1 320px; font-size: clamp(16px, 1.6vw, 30px) !important; }
+
+/* Cover and close */
+.cover { justify-content: space-between; gap: clamp(32px, 6vh, 64px); }
+.lockup { display: flex; align-items: center; gap: clamp(16px, 2.4vw, 40px); }
+.lockup svg { width: clamp(84px, 12vw, 220px); height: auto; flex: none; }
+.lockup .words { display: flex; flex-direction: column; gap: 6px; }
+.lockup .desc { font-family: 'Space Grotesk', Arial, sans-serif; font-size: clamp(11px, 1.6vw, 30px); font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: var(--ball-lime); }
+.lockup .name { font-family: 'Space Grotesk', Arial, sans-serif; font-size: clamp(40px, 6.4vw, 104px); font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: #F6F7F2; }
+.mini-lockup { display: flex; align-items: center; gap: 16px; }
+.mini-lockup svg { width: clamp(44px, 4vw, 72px); height: auto; }
+.mini-lockup .name { font-family: 'Space Grotesk', Arial, sans-serif; font-size: clamp(22px, 2vw, 36px); font-weight: 700; color: #F6F7F2; }
+.scroll-hint { position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); width: auto; display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: 'Space Grotesk', Arial, sans-serif; font-size: 13px; letter-spacing: .25em; text-transform: uppercase; color: var(--ink-muted-dark); }
+.scroll-hint span { display: block; width: 2px; height: 36px; background: linear-gradient(var(--ball-lime), transparent); animation: hint 1.8s var(--ease) infinite; transform-origin: top; }
+@keyframes hint { 0% { transform: scaleY(0); opacity: 1; } 70% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+
+/* ---------- Chrome: progress bar, dot nav, brand chip ---------- */
+.progress { position: fixed; inset: 0 0 auto 0; height: 4px; background: var(--ball-lime); transform-origin: left; transform: scaleX(0); z-index: 50; }
+.brand-chip { position: fixed; top: 16px; left: 20px; z-index: 40; display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; border-radius: 999px; background: rgba(14, 42, 59, .88); backdrop-filter: blur(8px); color: #F6F7F2; font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 700; font-size: 15px; letter-spacing: -0.01em; text-decoration: none; opacity: 0; transform: translateY(-8px); transition: opacity .4s var(--ease), transform .4s var(--ease); pointer-events: none; }
+.brand-chip.show { opacity: 1; transform: none; pointer-events: auto; }
+.brand-chip svg { width: 26px; height: 26px; }
+.dots { position: fixed; right: clamp(10px, 1.6vw, 24px); top: 50%; transform: translateY(-50%); z-index: 40; display: flex; flex-direction: column; gap: 10px; }
+.dots a { position: relative; display: block; width: 10px; height: 10px; border-radius: 999px; background: rgba(95, 117, 132, .45); transition: transform .3s var(--ease), background .3s; }
+.dots a.on { background: var(--ball-lime); transform: scale(1.5); box-shadow: 0 0 0 2px var(--court-navy); }
+.dots a span { position: absolute; right: 20px; top: 50%; transform: translateY(-50%) translateX(6px); white-space: nowrap; background: var(--court-navy); color: #F6F7F2; font-size: 13px; font-family: 'Inter', Arial, sans-serif; padding: 6px 10px; border-radius: 8px; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
+.dots a:hover span, .dots a:focus-visible span { opacity: 1; transform: translateY(-50%); }
+@media (max-width: 700px) { .dots, .notes-pill { display: none; } }
+@media (max-height: 760px), (max-width: 700px) { .scroll-hint { display: none; } }
+
+/* Presenter notes (press N) */
+body.notes section > aside { display: block; border: 2px dashed #93A5B0; border-radius: 16px; padding: 16px 20px; font-size: clamp(14px, 1.1vw, 18px); line-height: 1.5; color: var(--ink-muted); background: rgba(255, 255, 255, .6); }
+body.notes section.dark > aside { color: var(--ink-muted-dark); background: rgba(255, 255, 255, .05); }
+.notes-pill { position: fixed; bottom: 16px; right: 20px; z-index: 40; font-family: 'Inter', Arial, sans-serif; font-size: 12px; color: #5F7584; background: rgba(246, 247, 242, .9); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
+
+/* ---------- Scroll-in animation ---------- */
+.js .in { opacity: 0; transform: translateY(36px) scale(.985); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--i, 0) * 120ms + 80ms); }
+.js section.visible .in { opacity: 1; transform: none; }
+/* Headings slide up from behind a mask */
+.js .head h1, .js .head h2 { clip-path: inset(0 0 100% 0); transform: translateY(24px); transition: clip-path .9s var(--ease), transform .9s var(--ease); }
+.js section.visible .head h1, .js section.visible .head h2 { clip-path: inset(0 0 -20% 0); transform: none; }
+.js .head .eyebrow { opacity: 0; letter-spacing: .5em; transition: opacity .8s var(--ease), letter-spacing 1s var(--ease); }
+.js section.visible .head .eyebrow { opacity: 1; letter-spacing: .25em; }
+/* Staggered children: timeline, ladder, results, steps */
+.js .stagger > * { opacity: 0; transform: translateY(20px) scale(.9); transition: opacity .55s var(--ease), transform .55s var(--ease); transition-delay: calc(var(--j, 0) * 70ms + 300ms); }
+.js section.visible .stagger > * { opacity: 1; transform: none; }
+.js .timeline .link { transform: scaleX(0); opacity: 1; }
+.js section.visible .timeline .link { transform: scaleX(1); }
+.js section.visible .res.kept { animation: pop .6s var(--ease) both; animation-delay: calc(var(--j, 0) * 70ms + 900ms); }
+.js section.visible .res.dropped, .js section.visible .res.missed { transition-delay: calc(var(--j, 0) * 70ms + 300ms); opacity: .75; }
+@keyframes pop { 0% { transform: scale(1); } 40% { transform: scale(1.08); box-shadow: 0 0 0 6px rgba(200, 240, 49, .35); } 100% { transform: scale(1); } }
+/* Cover mark rolls in like a ball */
+.js .lockup svg { transform: translateX(-60px) rotate(-200deg); opacity: 0; transition: transform 1.2s var(--ease), opacity .6s; }
+.js section.visible .lockup svg { transform: none; opacity: 1; }
+/* Each scene gently settles as it arrives */
+.js section > .card.lime:first-child { transform-origin: left center; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .in, .js .stagger > *, .js .head h1, .js .head h2, .js .head .eyebrow, .js .lockup svg, .js .timeline .link { opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important; animation: none !important; letter-spacing: .25em; }
+  .js .head h1, .js .head h2 { letter-spacing: -0.02em; }
+  .scroll-hint span { animation: none; }
+}
+
+@media print {
+  html { scroll-snap-type: none; }
+  section { min-height: auto; page-break-after: always; }
+  .progress, .dots, .brand-chip, .notes-pill, .scroll-hint { display: none; }
+  .js .in, .js .stagger > *, .js .head h1, .js .head h2 { opacity: 1; transform: none; clip-path: none; }
+}
+
+/* A number badge on a lime card is reversed: lime on navy. */
+.card.lime .num { background: var(--court-navy) !important; color: var(--ball-lime) !important; }
+
+</style>
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<a class="brand-chip" href="#cover" aria-label="Back to the start"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="#C8F031"/><g fill="#0E2A3B"><circle cx="38" cy="26" r="7"/><circle cx="38" cy="38" r="7"/><circle cx="38" cy="50" r="7"/><circle cx="38" cy="62" r="7"/><circle cx="38" cy="74" r="7"/><circle cx="50" cy="74" r="7"/><circle cx="62" cy="74" r="7"/></g></svg>RallyLedger</a>
+<nav class="dots" aria-label="Slides"></nav>
+<main>
+<section id="cover" class="dark cover">
+<div class="lockup in">
+<svg aria-label="Locar Pickle Systems mark" width="220" height="220" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#C8F031"/><g fill="#0E2A3B"><circle cx="38" cy="26" r="5.2"/><circle cx="38" cy="38" r="5.2"/><circle cx="38" cy="50" r="5.2"/><circle cx="38" cy="62" r="5.2"/><circle cx="38" cy="74" r="5.2"/><circle cx="50" cy="74" r="5.2"/><circle cx="62" cy="74" r="5.2"/></g><g fill="#0E2A3B" opacity="0.28"><circle cx="26" cy="26" r="2.6"/><circle cx="50" cy="26" r="2.6"/><circle cx="62" cy="26" r="2.6"/><circle cx="74" cy="26" r="2.6"/><circle cx="26" cy="38" r="2.6"/><circle cx="50" cy="38" r="2.6"/><circle cx="62" cy="38" r="2.6"/><circle cx="74" cy="38" r="2.6"/><circle cx="26" cy="50" r="2.6"/><circle cx="50" cy="50" r="2.6"/><circle cx="62" cy="50" r="2.6"/><circle cx="74" cy="50" r="2.6"/><circle cx="26" cy="62" r="2.6"/><circle cx="50" cy="62" r="2.6"/><circle cx="62" cy="62" r="2.6"/><circle cx="74" cy="62" r="2.6"/><circle cx="26" cy="74" r="2.6"/><circle cx="74" cy="74" r="2.6"/></g></svg>
+<div class="words">
+<p class="desc">Locar Pickle Systems</p>
+<p class="name">RallyLedger</p>
+</div>
+</div>
+<div class="head in" style="--i:2">
+<h1>Club championship proposal</h1>
+<p class="lead">A proposal for a club championship series</p>
+</div>
+<aside>Welcome. Tonight is a tour of RallyLedger, the app that runs our club tournaments. No tech knowledge needed: think of it as the club’s scoreboard, fixture list and attendance book rolled into one, and it lives on your phone.</aside>
+<div class="scroll-hint" aria-hidden="true">Scroll<span></span></div>
+</section>
+<section id="big-picture">
+<div class="card lime in" style="padding:48px 56px;gap:16px">
+<p class="tag" style="color:#0E2A3B">my proposal</p>
+<h2>A Club Championship Series, run on RallyLedger</h2>
+</div>
+<p class="lead in" style="--i:1">RallyLedger was built for our club, and it handles every part of the series:</p>
+<div class="grid3">
+<div class="card in" style="--i:2"><p class="tag">Before the night</p><h3>Fixture list</h3><p>Sessions are scheduled ahead, and players RSVP so organisers know who’s coming.</p></div>
+<div class="card in" style="--i:3"><p class="tag">On the night</p><h3>Scoreboard</h3><p>Check people in, draw the games, enter the scores. Everyone’s phone updates live.</p></div>
+<div class="card navy in" style="--i:4"><p class="tag" style="color:#C8F031">Across the season</p><h3>The ladder</h3><p>Every night’s finish earns championship points that build into the season standings.</p></div>
+</div>
+<aside>Here’s the proposal in one line: we run a Club Championship Series across the season, and RallyLedger, the system built for our club, runs it for us. Think of it as the club noticeboard, the scorer’s clipboard and the trophy ladder, all in one place on your phone. It replaces the clipboard, the whiteboard and the spreadsheet. Before a session it’s the fixture list and RSVP sheet. On the night it’s the scorer. Across the season it keeps the ladder. The rest of this talk walks through each part.</aside>
+</section>
+<section id="why-series">
+<div class="head">
+<p class="eyebrow">Why a championship series</p>
+<h2>Why a series is good for the club</h2>
+</div>
+<div class="grid3">
+<div class="card in" style="--i:1"><p class="num">1</p><h3>Builds club camaraderie</h3><p>Everyone shares one season. Rotating partners means you play with lots of members, and everyone follows the same ladder.</p><p style="color:#0E2A3B"><i>Like a footy club: the whole club gets behind the season.</i></p></div>
+<div class="card in" style="--i:2"><p class="num">2</p><h3>Brings in income</h3><p>Points reward turning up, so players have a reason to keep coming back. More regular attendance means more session fees for the club.</p><p style="color:#0E2A3B"><i>Like a loyalty card: every visit adds a stamp.</i></p></div>
+<div class="card navy in" style="--i:3"><p class="num">3</p><h3>A baseline for every player</h3><p>Every member builds a results history and a Club Rating, so we know where everyone stands, newcomers included.</p><p style="color:#C8F031"><i>Like a golf club’s handicap register.</i></p></div>
+</div>
+<aside>So why do this at all? Three reasons. First, camaraderie: a season gives everyone a shared story. With rotating partners you play alongside lots of different members, and everyone is following the same ladder, the same way a footy club rallies around its season. Second, income: championship points reward turning up, and dropped results mean a missed week is never a reason to give up. Players have a reason to keep coming back, and regular attendance means steady session fees for the club. It works like a loyalty card. Third, a baseline: every player builds a results history and a Club Rating. That tells us where everyone stands, helps us place newcomers and set up fair divisions, a bit like a golf club’s handicap register.</aside>
+</section>
+<section id="ladder-league">
+<div class="head">
+<p class="eyebrow">How it compares</p>
+<h2>Like a ladder league, with a twist</h2>
+</div>
+<div class="grid2">
+<div class="card in" style="--i:1">
+<p class="tag">What feels familiar</p>
+<h3>The ladder-league basics</h3>
+<p>Regular sessions across a season.</p>
+<p>A ladder everyone can check to see where they stand.</p>
+<p>Games against people near your level.</p>
+<p>Climb up through the divisions as you improve.</p>
+</div>
+<div class="card lime in" style="--i:2">
+<p class="tag" style="color:#0E2A3B">What’s different</p>
+<h3>The RallyLedger twist</h3>
+<p>Rotating partners, so it stays social.</p>
+<p>You climb by collecting points, and they never go down.</p>
+<p>Your best nights count, and the weak ones are dropped.</p>
+</div>
+</div>
+<div class="analogy in" style="--i:3"><p class="k">In short</p><p>All the fun of chasing the ladder, without the pressure of losing your spot.</p></div>
+<aside>If you’ve played in a ladder league, a lot of this will feel familiar: a season of regular play, a ladder you can check, games against people around your level, and the chance to move up. The twist is in how you climb. There are no challenge matches to organise: you just turn up on the night and the app does the draw, with rotating partners so it stays social. And instead of swapping places when you win or lose, you collect championship points that only ever go up, with your weakest nights dropped. So you get the fun of chasing the ladder without the worry of sliding down it.</aside>
+</section>
+<section id="season">
+<div class="head">
+<p class="eyebrow">Tournaments and sessions</p>
+<h2>A tournament is a season. A session is a match day.</h2>
+</div>
+<div class="timeline in" style="--i:1">
+<div class="dot done">1</div><div class="link"></div>
+<div class="dot done">2</div><div class="link"></div>
+<div class="dot done">3</div><div class="link"></div>
+<div class="dot">4</div><div class="link"></div>
+<div class="dot">5</div><div class="link"></div>
+<div class="dot">6</div><div class="link"></div>
+<div class="dot">7</div><div class="link"></div>
+<div class="dot">8</div><div class="link"></div>
+<div class="dot final">Finals</div>
+</div>
+<div class="grid2">
+<div class="card in" style="--i:2"><h3>The tournament</h3><p>Runs over a set number of sessions, say 8 (can be set per tournament).&nbsp;<br><br>It has a name, a season label and its own rules for points and divisions.</p></div>
+<div class="card in" style="--i:3"><h3>Each session</h3><p>One club night: a date, a venue, a number of courts. Your result on the night earns points toward the season.</p></div>
+</div>
+<div class="analogy in" style="--i:4"><p class="k">Like footy</p><p>The home-and-away season is a run of rounds, and finals come at the end.</p></div>
+<aside>The easiest way to picture it is a footy season. The tournament is the whole season. Each session is one round: you turn up, play, and get a finishing position for that night. Those add up over the season. At the end there can be a finals night. Dark circles here are sessions already played.</aside>
+</section>
+<section id="session-night">
+<div class="head">
+<p class="eyebrow">Tournaments and sessions</p>
+<h2>A session night, start to finish</h2>
+</div>
+<div class="steps">
+<div class="step in" style="--i:1"><p class="num">1</p><h3>RSVP</h3><p>OPTIONAL<br>Players say they’re coming, from their phone. when they have a login setup</p></div>
+<div class="step in" style="--i:2"><p class="num">2</p><h3>Check in</h3><p>The organiser ticks off who actually turned up.</p></div>
+<div class="step in" style="--i:3"><p class="num">3</p><h3>The draw</h3><p>The app sets the games and courts, with a new partner each round.</p></div>
+<div class="step in" style="--i:4"><p class="num">4</p><h3>Scores</h3><p>Scores go in as games finish. Everyone sees them live.</p></div>
+<div class="step in" style="--i:5"><p class="num">5</p><h3>Publish</h3><p>A final check, then results and points go on the ladder.</p></div>
+</div>
+<div class="analogy in" style="--i:6"><p class="k">Like a dance class</p><p>You rotate partners all night, but your own scorecard follows you around.</p></div>
+<aside>Here’s a night from the organiser’s side. People RSVP during the week. On the night the session manager checks in who’s actually there. The app then makes the draw: who plays who, on which court, with partners rotating every round so you play with lots of different people. Scores are typed in as games finish and show up on everyone’s phone. At the end there’s a review step before results are published, a bit like a scorer double-checking the card before signing it.</aside>
+</section>
+<section id="night-ranking">
+<div class="head">
+<p class="eyebrow">Tournaments and sessions</p>
+<h2>How a night is ranked</h2>
+<p class="lead">You’re ranked on your own record. Ties settle in this order:</p>
+</div>
+<div class="grid4">
+<div class="card lime in" style="--i:1"><p class="num" style="background:#0E2A3B;color:#C8F031">1</p><h3>Most wins</h3><p>Games won on the night.</p></div>
+<div class="card in" style="--i:2"><p class="num">2</p><h3>Fewest losses</h3><p>Matters when people played a different number of games.</p></div>
+<div class="card in" style="--i:3"><p class="num">3</p><h3>Point difference</h3><p>Points you scored minus points scored against you.</p></div>
+<div class="card in" style="--i:4"><p class="num">4</p><h3>Points scored</h3><p>The last tie-breaker: total points you won.</p></div>
+</div>
+<div class="analogy in" style="--i:5"><p class="k">Like a sports table</p><p>Wins first, then goal difference, then goals scored.</p></div>
+<aside>Even though you partner different people every round, the app keeps a personal record for you: your wins, your losses and your points. At the end of the night everyone is lined up from first to last. If two people are level on wins, it looks at who lost fewer, then at point difference, then at total points scored. It’s exactly like a league table settling teams on the same points with goal difference.</aside>
+</section>
+<section id="points-table">
+<div class="head">
+<p class="eyebrow">Championship points</p>
+<h2>Your finish on the night earns points</h2>
+</div>
+<div class="ladder in" style="--i:1">
+<div class="rung top"><p class="place">1st</p><p class="pts">100</p></div>
+<div class="rung"><p class="place">2nd</p><p class="pts">85</p></div>
+<div class="rung"><p class="place">3rd</p><p class="pts">75</p></div>
+<div class="rung"><p class="place">4th</p><p class="pts">65</p></div>
+<div class="rung"><p class="place">5th</p><p class="pts">58</p></div>
+<div class="rung"><p class="place">6th</p><p class="pts">52</p></div>
+<div class="rung"><p class="place">7th</p><p class="pts">46</p></div>
+<div class="rung"><p class="place">8th</p><p class="pts">40</p></div>
+<div class="rung"><p class="place">9th</p><p class="pts">35</p></div>
+<div class="rung"><p class="place">10th</p><p class="pts">30</p></div>
+<div class="rung"><p class="place">11th</p><p class="pts">26</p></div>
+<div class="rung"><p class="place">12th</p><p class="pts">22</p></div>
+</div>
+<p class="in" style="--i:2">Finish below 12th and you still get <b>participation points</b> (18 by default) just for playing. Each tournament can change these numbers.</p>
+<div class="analogy in" style="--i:3"><p class="k">Like Formula 1</p><p>Each race pays points by finishing position. Points add up, and the season ladder is the total.</p></div>
+<aside>This is the heart of the system. Every night, your finishing place converts into championship points. First gets 100, second 85, and so on down. Even if you finish last you still get participation points, so turning up always moves you forward. It works like Formula 1: each Grand Prix pays points by position, and the championship goes to whoever collects the most across the season. These are the default numbers; a tournament manager can adjust them.</aside>
+</section>
+<section id="best-n" class="dark">
+<div class="head">
+<p class="eyebrow">Dropped results</p>
+<h2>Only your best nights count</h2>
+<p class="lead">With “Best 5 of 8”, the ladder adds up your five best sessions. Your worst nights, and any you missed, are simply left out.</p>
+</div>
+<div class="grid3">
+<div class="card in" style="--i:1"><h3>Away? No penalty.</h3><p>Miss up to 3 of 8 sessions for holidays, work or injury and lose nothing.</p></div>
+<div class="card in" style="--i:2"><h3>Off night? Dropped.</h3><p>A bad night only counts if it’s one of your best.</p></div>
+<div class="card in" style="--i:3"><h3>Extra nights only help</h3><p>Every extra night you play is another chance to replace a low score.</p></div>
+</div>
+<div class="analogy in" style="--i:4"><p class="k" style="color:#0e2a3b">Like school tests</p><p>The teacher drops your lowest marks, so one bad day doesn’t define your term.</p></div>
+<aside>This is the drop-results rule, and it’s the part people like most. The tournament decides how many sessions count, for example the best 5 out of 8. Your best five nights are added up and the rest are ignored. So if you’re away for a couple of weeks you’re not punished, and if you have a shocker one night it just falls off the bottom. And because more nights give you more chances to post a good score, regular attendance still pays. By default the app counts roughly two-thirds of the planned sessions.</aside>
+</section>
+<section id="best-n-example">
+<div class="head">
+<p class="eyebrow">Dropped results</p>
+<h2>Example: Sam’s season, Best 5 of 8</h2>
+</div>
+<div class="results in" style="--i:1">
+<div class="res kept"><p class="s">Night 1</p><p class="v">100</p><p class="w">Counts</p></div>
+<div class="res kept"><p class="s">Night 2</p><p class="v">85</p><p class="w">Counts</p></div>
+<div class="res dropped"><p class="s">Night 3</p><p class="v">40</p><p class="w">Dropped</p></div>
+<div class="res missed"><p class="s">Night 4</p><p class="v">Away</p><p class="w">No penalty</p></div>
+<div class="res kept"><p class="s">Night 5</p><p class="v">75</p><p class="w">Counts</p></div>
+<div class="res dropped"><p class="s">Night 6</p><p class="v">22</p><p class="w">Dropped</p></div>
+<div class="res kept"><p class="s">Night 7</p><p class="v">65</p><p class="w">Counts</p></div>
+<div class="res kept"><p class="s">Night 8</p><p class="v">58</p><p class="w">Counts</p></div>
+</div>
+<div class="total in" style="--i:2">
+<p class="big">383</p>
+<p style="font-size:32px">championship points: 100 + 85 + 75 + 65 + 58. The two weakest nights and the missed week don’t count against Sam at all.</p>
+</div>
+<div class="analogy in" style="--i:3"><p class="k">The takeaway</p><p>You can only add to your score. Nothing you do on a bad night can take points away.</p></div>
+<aside>Here’s how it looks in practice. Sam played seven of the eight nights and was away once. The lime boxes are the five best results, which add up to 383. Night 3 and Night 6 were poor nights and they’re simply dropped, and the week away costs nothing. Notice there’s no way for a bad night to pull Sam’s total down: it either counts because it’s one of the best, or it’s ignored.</aside>
+</section>
+<section id="finals">
+<div class="head">
+<p class="eyebrow">Finals</p>
+<h2>Finals night: a knockout to finish the season</h2>
+</div>
+<div class="grid3">
+<div class="card in" style="--i:1"><h3>Seeded by the ladder</h3><p>Your place in the standings decides your seed, so the season’s top players meet the lowest seeds first.</p></div>
+<div class="card in" style="--i:2"><h3>Knockout format</h3><p>Single or double elimination, by division or across the whole club, with an optional singles showdown.</p></div>
+<div class="card in" style="--i:3"><h3>Ladder stays put</h3><p>Finals don’t add championship points or move anyone between divisions.</p></div>
+</div>
+<div class="analogy in" style="--i:4"><p class="k">Like AFL finals</p><p>Finish high on the ladder to earn a better draw, then it’s win and you’re through.</p></div>
+<aside>Many seasons end with a finals night. The app builds a knockout bracket for you. Seeds come straight from the ladder, so a strong season earns an easier first match, just like the top four in the AFL. The tournament manager picks the format: one loss and you’re out, or double elimination where you get a second life, and whether it’s per division or the whole club. Finals sit on top of the season: they don’t change the points ladder.</aside>
+</section>
+<section id="divisions">
+<div class="head">
+<p class="eyebrow">Divisions</p>
+<h2>Divisions keep games close</h2>
+<p class="lead">A tournament can split players into divisions, such as Division 1 and Division 2, so you mostly play people near your level.</p>
+</div>
+<div class="grid3">
+<div class="card in" style="--i:1"><h3>Set by organisers</h3><p>Managers place each player in a division. Players can’t pick their own.</p></div>
+<div class="card in" style="--i:2"><h3>Ranked within it</h3><p>On the night each division plays and is ranked separately, with its own winner.</p></div>
+<div class="card in" style="--i:3"><h3>Courts your way</h3><p>Divisions can share all the courts, or each can have its own courts.</p></div>
+</div>
+<div class="analogy in" style="--i:4"><p class="k">Like grades in local footy</p><p>A grades and B grades play their own games on the same day, at the same ground.</p></div>
+<aside>Divisions are about keeping games competitive and fun. Instead of a beginner being drawn against our strongest player, the club can split into groups. Organisers decide who goes where; players don’t choose their own division. On the night, each division plays among itself and has its own results. Courts can be shared out round by round, or each division can have its own block of courts. Think of A grade and B grade playing on the same day at the same ground.</aside>
+</section>
+<section id="promotion">
+<div class="head">
+<p class="eyebrow">Divisions</p>
+<h2>Earn your way up, automatically</h2>
+<p class="lead">When switched on, the app moves players once they’ve earned it.</p>
+</div>
+<div class="grid2">
+<div class="card lime in" style="--i:1"><p class="tag" style="color:#0E2A3B">Moving up</p><h3>Top of your division, again and again</h3><p>Finish in the top spots of your division for a run of sessions in a row, for example top 1 twice running, and you move up.</p></div>
+<div class="card in" style="--i:2"><p class="tag">Moving down</p><h3>Bottom of your division, again and again</h3><p>Finish in the bottom spots for the same run of sessions and you move down to find closer games.</p></div>
+</div>
+<div class="analogy in" style="--i:4"><p class="k">Like soccer leagues</p><p>Promotion and relegation, but decided over a few weeks rather than one bad night.</p></div>
+<aside>When there’s more than one division, the club can turn on automatic promotion and relegation. The rule is about consistency: you have to finish at the top of your division for a set number of sessions in a row to go up, or at the bottom for that many in a row to go down. Organisers choose the numbers, for example top one twice running. A single fluke night never moves anyone. It’s promotion and relegation like the English soccer leagues, just judged over a short streak instead of one game. Finals nights never count toward this.</aside>
+</section>
+<section id="why-points" class="dark">
+<div class="head">
+<p class="eyebrow">Why championship points</p>
+<h2>Points only go up. Ratings go up and down.</h2>
+</div>
+<div class="grid2">
+<div class="card in" style="--i:1">
+<p class="tag" style="color:#f6f7f2">A pure ratings ladder</p>
+<h3>Like a share price</h3>
+<p>Every game can push your number down as well as up.</p>
+<p>A tough draw or an off night costs you.</p>
+<p>Other ladder leagues already run this way.</p>
+</div>
+<div class="card lime in" style="--i:2">
+<p class="tag" style="color:#f6f7f2">RallyLedger’s championship points</p>
+<h3>Like a savings jar</h3>
+<p>Every night you play adds points. Nothing takes them away.</p>
+<p>Your worst nights are dropped.</p>
+<p>Something different that the club offers.</p>
+</div>
+</div>
+<div class="analogy in" style="--i:3"><p class="k" style="color:#0e2a3b">The result</p><p>Players only ever see their season heading upward, so it’s rewarding to keep turning up.</p></div>
+<aside>This is the big question: why points and not a pure rating ladder? Two reasons. First, rating ladders already exist: other leagues and apps like DUPR do exactly that, so offering the same thing gives members nothing new. Second, and more important, a rating works like a share price. It goes up and down with every game, so a hard draw or an off night can undo weeks of progress. That’s discouraging, especially for newer or social players. Championship points work like a savings jar: every night adds to it, nothing takes away from it, and with dropped results your worst nights don’t even count. Everyone’s season only goes up, which keeps people coming back.</aside>
+</section>
+<section id="rating-role">
+<div class="head">
+<p class="eyebrow">Why championship points</p>
+<h2>The Club Rating still has a job</h2>
+<p class="lead">A skill number that moves with results. It never decides the trophy.</p>
+</div>
+<div class="grid3">
+<div class="card in" style="--i:1"><h3>Points win the season</h3><p>Standings and champions come from championship points only.</p></div>
+<div class="card in" style="--i:2"><h3>Ratings guide fairness</h3><p>Organisers use the rating to place people in the right division and spot who’s outgrown theirs.</p></div>
+<div class="card in" style="--i:3"><h3>New players start fair</h3><p>Newcomers get a starting level, then settle quickly over their first four sessions.</p></div>
+</div>
+<div class="analogy in" style="--i:4"><p class="k">Like a golf handicap</p><p>It helps make games even. The trophy still goes to the best scores.</p></div>
+<aside>To be clear, the app does keep a skill rating, called the Club Rating, and it does move up and down with results. But it isn’t what you’re competing for. Think of it like a golf handicap: it helps organisers set up fair games and put people in the right division, while the trophy is decided by the points ladder. New players are given a starting level when they join, beginner through to expert, and the rating settles in quickly over their first four sessions.</aside>
+</section>
+<section id="roles">
+<div class="head">
+<p class="eyebrow">Who can do what</p>
+<h2>Four kinds of people, like a sports club</h2>
+</div>
+<div class="grid4">
+<div class="card in" style="--i:1"><p class="tag">The spectators</p><h3>Visitors</h3><p>No login needed.</p><p>See the standings and follow live sessions.</p></div>
+<div class="card in" style="--i:2"><p class="tag">The players</p><h3>Players</h3><p>Everything visitors see, plus:</p><p>Their own stats page and RSVPs.</p><p>Change their own name and password.</p></div>
+<div class="card in" style="--i:3"><p class="tag">The Committee</p><h3>Session managers</h3><p>Run the night: check-in, draws, scores, publishing.</p><p>Add sessions, manage players and assign divisions.<br><br>Create logins for players including resets</p></div>
+<div class="card navy in" style="--i:4"><p class="tag" style="color:#C8F031">Select few</p><h3>Tournament managers</h3><p>Everything, including:</p><p>Setting up tournaments and rules agreed by the committee.</p><p>Creating logins and manager accounts.</p></div>
+</div>
+<aside>There are four levels of access, and a sports club is a good way to think about them. Visitors are the spectators in the stands: anyone can look at the standings and watch a live session without logging in. Players have a login: they get their own stats page, can RSVP, and can change their own display name and password, but nobody else’s. Session managers are the umpires and scorers: they run the night, from check-in to publishing results, and they can add sessions, look after the player list and put people in divisions. Tournament managers are the committee: they set up the season and its rules, and they’re the only ones who hand out logins and manager accounts.</aside>
+</section>
+<section id="logins">
+<div class="head">
+<p class="eyebrow">Player logins</p>
+<h2>How a player gets a login</h2>
+</div>
+<div class="grid4">
+<div class="step in" style="--i:1"><p class="num">1</p><h3>Join the roster</h3><p>A manager adds the player to the Club Roster and picks a starting level.</p></div>
+<div class="step in" style="--i:2"><p class="num">2</p><h3>Create a login</h3><p>A tournament manager sets a username or email and a temporary password.</p></div>
+<div class="step in" style="--i:3"><p class="num">3</p><h3>Hand it over</h3><p>The player signs in and can change their password any time.</p></div>
+<div class="step in" style="--i:4"><p class="num">4</p><h3>Lost or leaving</h3><p>A manager sets a new password, or switches the login off.</p></div>
+</div>
+<p class="in" style="--i:5">No login? You can still play, score points and appear on the ladder. A login just unlocks your own stats and RSVPs.</p>
+<div class="analogy in" style="--i:6"><p class="k">Like a clubhouse key</p><p>The committee cuts the key, you can change the code, and a lost key is simply replaced.</p></div>
+<aside>Logins are handed out by tournament managers, a bit like the committee cutting clubhouse keys. First, the player is added to the club roster with a starting level. Then a tournament manager creates their login: a username or email, plus a temporary password of at least eight characters. You pass that on to the player, and they can change the password themselves whenever they like. If someone forgets their password, a manager just sets a new one; if someone leaves, the login can be switched off without losing their results. And remember: you don’t need a login to play. It just unlocks your personal page and RSVPs.</aside>
+</section>
+<section id="close" class="dark cover">
+<div class="mini-lockup in">
+<svg aria-label="Locar Pickle Systems mark" width="72" height="72" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="#C8F031"/><g fill="#0E2A3B"><circle cx="38" cy="26" r="6"/><circle cx="38" cy="38" r="6"/><circle cx="38" cy="50" r="6"/><circle cx="38" cy="62" r="6"/><circle cx="38" cy="74" r="6"/><circle cx="50" cy="74" r="6"/><circle cx="62" cy="74" r="6"/></g></svg>
+<p class="name">RallyLedger</p>
+</div>
+<div class="head in" style="--i:1">
+<h1>Turn up. Play. Your best nights count.</h1>
+<p class="lead">Points only go up, divisions keep games close, and everyone can follow along on their phone.</p>
+</div>
+<h2 class="in" style="--i:2;color:#C8F031">Questions?</h2>
+<aside>To wrap up: every night you play adds championship points, your worst nights are dropped, divisions keep the games close, and anyone can follow along on their phone. Happy to take questions.</aside>
+</section>
+</main>
+<p class="notes-pill" aria-hidden="true">Arrow keys to move · N for notes</p>
+<script>
+(function () {
+  document.documentElement.classList.add('js');
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main > section'));
+  var dotsNav = document.querySelector('.dots');
+  var chip = document.querySelector('.brand-chip');
+  var bar = document.querySelector('.progress');
+
+  // Number staggered children so they arrive one after another.
+  document.querySelectorAll('.timeline, .ladder, .results, .steps, .grid4').forEach(function (group) {
+    group.classList.add('stagger');
+    Array.prototype.forEach.call(group.children, function (child, i) {
+      child.style.setProperty('--j', i);
+    });
+  });
+
+  // Dot navigation, one per slide, labelled with its heading.
+  sections.forEach(function (section, i) {
+    var heading = section.querySelector('h1, h2');
+    var a = document.createElement('a');
+    a.href = '#' + section.id;
+    a.setAttribute('aria-label', 'Slide ' + (i + 1) + ': ' + (heading ? heading.textContent : section.id));
+    var label = document.createElement('span');
+    label.textContent = heading ? heading.textContent : section.id;
+    a.appendChild(label);
+    dotsNav.appendChild(a);
+  });
+  var dotLinks = dotsNav.querySelectorAll('a');
+
+  var current = 0;
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var i = sections.indexOf(entry.target);
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        if (entry.intersectionRatio >= 0.5 || entry.boundingClientRect.top <= window.innerHeight * 0.3) {
+          current = i;
+          dotLinks.forEach(function (d, k) { d.classList.toggle('on', k === i); });
+          chip.classList.toggle('show', i > 0);
+        }
+      } else if (entry.boundingClientRect.top > 0) {
+        // Scrolled back above it: reset, so it animates in again next time.
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: [0.25, 0.5] });
+  sections.forEach(function (s) { observer.observe(s); });
+
+  function onScroll() {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  function go(i) {
+    i = Math.max(0, Math.min(sections.length - 1, i));
+    sections[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.closest && e.target.closest('input, textarea')) return;
+    if (e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !e.shiftKey) || e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
+    else if (e.key === 'ArrowUp' || e.key === 'PageUp' || (e.key === ' ' && e.shiftKey) || e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); go(0); }
+    else if (e.key === 'End') { e.preventDefault(); go(sections.length - 1); }
+    else if (e.key === 'n' || e.key === 'N') { document.body.classList.toggle('notes'); }
+  });
+})();
+
+</script>
+</body>
+</html>
